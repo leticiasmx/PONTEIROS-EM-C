@@ -1,0 +1,87 @@
+#include <stdio.h>
+
+int main() {
+    int pontos[4][4] = {{5, 7, 8, 6},
+                       {4, 6, 5, 7},
+                       {3, 9, 6, 8},
+                       {2, 4, 7, 5}};
+    
+    int *ptr = &pontos[0][0];
+    int pares = 0, impares = 0;
+    int total_jogador[4] = {0};
+    int total_set[4] = {0};
+    float media_jogador[4];
+    int regularidade[4];
+    
+    // Mostrar matriz e calcular estatísticas
+    printf("Pontuacao dos jogadores:\n");
+    for(int i = 0; i < 4; i++) {
+        printf("Jogador %d: ", i+1);
+        for(int j = 0; j < 4; j++) {
+            int valor = *(ptr + i*4 + j);
+            printf("%d ", valor);
+            
+            // Pares e ímpares
+            if(valor % 2 == 0) pares++;
+            else impares++;
+            
+            // Total por jogador
+            total_jogador[i] += valor;
+            
+            // Total por set
+            total_set[j] += valor;
+        }
+        printf("\n");
+    }
+    
+    // Estatísticas
+    printf("\nPares: %d | Impares: %d\n", pares, impares);
+    
+    // Melhor jogador
+    int melhor_jogador = 0;
+    int max_pontos = total_jogador[0];
+    for(int i = 1; i < 4; i++) {
+        if(total_jogador[i] > max_pontos) {
+            max_pontos = total_jogador[i];
+            melhor_jogador = i;
+        }
+    }
+    printf("Melhor jogador: %d (%d pontos)\n", melhor_jogador+1, max_pontos);
+    
+    // Set mais disputado
+    int melhor_set = 0;
+    int max_set = total_set[0];
+    for(int i = 1; i < 4; i++) {
+        if(total_set[i] > max_set) {
+            max_set = total_set[i];
+            melhor_set = i;
+        }
+    }
+    printf("Set mais disputado: %d (%d pontos)\n", melhor_set+1, max_set);
+    
+    // diferença entre maior e menor pontos
+    for(int i = 0; i < 4; i++) {
+        int min = *(ptr + i*4);
+        int max = *(ptr + i*4);
+        
+        for(int j = 1; j < 4; j++) {
+            int valor = *(ptr + i*4 + j);
+            if(valor < min) min = valor;
+            if(valor > max) max = valor;
+        }
+        regularidade[i] = max - min;
+    }
+    
+    // Jogador mais regular
+    int mais_regular = 0;
+    int min_diferenca = regularidade[0];
+    for(int i = 1; i < 4; i++) {
+        if(regularidade[i] < min_diferenca) {
+            min_diferenca = regularidade[i];
+            mais_regular = i;
+        }
+    }
+    printf("Jogador mais regular: %d (diferenca de: %d)\n", mais_regular+1, min_diferenca);
+    
+    return 0;
+}
