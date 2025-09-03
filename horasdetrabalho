@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    printf("Quantos funcionarios deseja registrar? ");
+    scanf("%d", &n);
+    
+    float horas = (float)malloc(n * sizeof(float));
+    float *ptr = horas;
+    float total = 0;
+    
+    printf("Digite as horas trabalhadas de cada funcionario:\n");
+    for(int i = 0; i < n; i++) {
+        scanf("%f", ptr + i);
+        total += *(ptr + i);
+    }
+    
+    printf("Total de horas trabalhadas no mes: %.2f\n", total);
+    free(horas);
+    
+    return 0;
+}
