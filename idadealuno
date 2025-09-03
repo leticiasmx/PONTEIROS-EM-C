@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+int main() {
+    int idade;
+    int *ptr = &idade;
+    
+    printf("Digite a idade: ");
+    scanf("%d", ptr);
+    
+    printf("Idade do aluno: %d\n", *ptr);
+    printf("Endereco na memoria onde esta armazenada: %p\n", ptr);
+    
+    return 0;
+}
