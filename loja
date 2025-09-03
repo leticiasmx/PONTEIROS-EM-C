@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main() {
+    float precos[5];
+    float *ptr = precos;
+    
+    printf("Digite 5 precos:\n");
+    for(int i = 0; i < 5; i++) {
+        scanf("%f", ptr + i);
+    }
+    
+    printf("\nPrecos com 10%% de desconto:\n");
+    for(int i = 0; i < 5; i++) {
+        printf("Original: R$%.2f | Desconto: R$%.2f\n", 
+               *(ptr + i), *(ptr + i) * 0.9);
+    }
+    
+    return 0;
+}
