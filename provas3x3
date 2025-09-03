@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+    float notas[3][3] = {{5.5, 8.0, 6.5}, 
+                        {7.0, 7.5, 8.5}, 
+                        {9.0, 6.5, 7.0}};
+    
+    float *ptr = &notas[0][0];
+    float soma_diagonal = 0;
+    
+    printf("Todas as notas:\n");
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            printf("%.1f ", *(ptr + i*3 + j));
+        }
+        printf("\n");
+    }
+    
+    for(int i = 0; i < 3; i++) {
+        soma_diagonal += *(ptr + i*3 + i);
+    }
+    
+    printf("\nSoma da diagonal principal e: %.1f\n", soma_diagonal);
+    
+    return 0;
+}
